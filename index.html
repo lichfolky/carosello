@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div class="wrapper">
+            <button class="prev" @click="currentIndex>0?currentIndex--:currentIndex">PREV</button>
+            <img :src="'https://picsum.photos/id/'+ (start + currentIndex) +'/800/600'" alt="picsum image">
+            <button class="next" @click="currentIndex<9?currentIndex++:currentIndex">NEXT</button>
+            <div class="thumbs">
+                <img v-for="n in 10"
+                    :src="'https://picsum.photos/id/'+ (start + n + - 1) +'/100/60' + (n - 1 ==  currentIndex?'?blur':'')"
+                    @click="currentIndex = n - 1" alt="picsum image thumb" :class="{active: n - 1 ==  currentIndex}">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const { createApp } = Vue;
+        createApp({
+            data() {
+                return {
+                    start: 30,
+                    currentIndex: 0
+                };
+            }
+        }).mount('#app');
+    </script>
+</body>
+
+</html>
